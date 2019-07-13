@@ -38,7 +38,7 @@ git reflog
 > 版本回退  
 git reset --hard HEAD^   回退到上个版本  
 git reset --hard HEAD^^  回退到上上个版本  
-git reset --hard 121312  回退到某个指定的版本（commit_id开头数字即可） 
+git reset --hard f25a5f  回退到某个指定的版本（commit_id开头数字即可） 
 
 > 撤销修改 工作区回到最近一次add或commit状态（工作区修改的内容不想要了）  
 git checkout -- readme.md 
