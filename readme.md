@@ -1,3 +1,4 @@
+000000
 ### 基本操作
 > 初始化仓库  
 git init  
@@ -33,6 +34,9 @@ git log --pretty=oneline
 git reflog  
     f25a5f2              HEAD@{2}: reset: moving to f25a5f   
 当前所在commit_id         执行了reset操作，移动到f25a5f
+
+> 查看远程分支的信息（地址等）    
+git remote -v
 
 ### 回退与撤销(恢复)
 > 版本回退  
@@ -75,6 +79,15 @@ git branch dev
 
 > 切换到dev分支     
 git checkout dev
+
+> 切换到dev分支，并与远程dev分支关联  
+git checkout -b dev origin/dev
+
+> 拉取远程分支更新内容
+git pull
+
+> 关联本地分支与远程分支  
+git branch --up-stream-to dev origin/dev
 
 > 查看所有本地分支  
 git branch
@@ -120,6 +133,18 @@ git commit -m "finish function"
 ```
 
 
+
+### 储存工作区
+> 储存工作区（准备去别的分支上修复Bug等）   
+git stash
+
+> 查看储存列表   
+git stash list
+
+> 回到最近的一次存储点   
+git stash pop
+
+### Rebase
 
 
 
