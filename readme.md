@@ -82,9 +82,6 @@ git branch
 > 查看所有分支  
 git branch -a
 
-> 合并dev分支到master分支（快进模式）    
-git merge dev
-
 > 删除分支   
 git branch -d dev
 
@@ -94,18 +91,36 @@ git branch -D dev
 > 查看分支合并图   
 git log --graph --pretty=oneline --abbrev-commit
 
-> 合并dev分支到master分支（禁用快进模式）, 保留dev分支commit历史
-git merge --no-ff dev
+> 合并dev分支到master分支（快进模式）    
+git merge dev  
+> 合并图 
+``` 
+* f162b63 modify at dev   
+* 7b75ac9 modify at master      
+* e98ef9d commit readme.md    
+```
 
+> 合并dev分支到master分支（禁用快进模式）, 保留dev分支commit历史   
+git merge --no-ff -m "merge no fast mode" dev
+> 合并图
+```
+* ab4e15b Merge branch 'dev'
+|\  
+| * 7af8cc5 modify at dev
+|/      
+* 7b75ac9 modify at master      
+* e98ef9d commit readme.md 
+```
 
 > 合并dev分支到master分支（压缩模式）, 保留dev分支commit历史，并将多次commit压缩成一次  
-git merge --squash dev
-
-11111111111111111
-22222222222222222
-33333333333333333
-66666666666666666
-
+git merge --squash dev   
+git commit -m "finish function"
+> 合并图
+```
+* 54565d7 finish function
+* 7b75ac9 modify at master      
+* e98ef9d commit readme.md 
+```
 
 
 
