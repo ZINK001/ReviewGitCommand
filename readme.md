@@ -93,7 +93,6 @@ git log --graph --pretty=oneline --abbrev-commit
 
 > 合并dev分支到master分支（快进模式）    
 git merge dev  
-> 合并图 
 ``` 
 * f162b63 modify at dev   
 * 7b75ac9 modify at master      
@@ -102,7 +101,6 @@ git merge dev
 
 > 合并dev分支到master分支（禁用快进模式）, 保留dev分支commit历史   
 git merge --no-ff -m "merge no fast mode" dev
-> 合并图
 ```
 * ab4e15b Merge branch 'dev'
 |\  
@@ -115,7 +113,6 @@ git merge --no-ff -m "merge no fast mode" dev
 > 合并dev分支到master分支（压缩模式）, 保留dev分支commit历史，并将多次commit压缩成一次  
 git merge --squash dev   
 git commit -m "finish function"
-> 合并图
 ```
 * 54565d7 finish function
 * 7b75ac9 modify at master      
