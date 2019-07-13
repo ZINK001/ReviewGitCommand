@@ -101,7 +101,7 @@ git merge --no-ff dev
 > 合并dev分支到master分支（压缩模式）, 保留dev分支commit历史，并将多次commit压缩成一次  
 git merge --squash dev
 
-
+11111111111111111
 
 
 
