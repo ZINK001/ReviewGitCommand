@@ -36,8 +36,8 @@ git reflog
 
 ### 回退与撤销(恢复)
 > 版本回退  
-git reset --hard HEAD^   回退到上个版本  
-git reset --hard HEAD^^  回退到上上个版本  
+git reset --hard HEAD^   回退到上次提交 
+git reset --hard HEAD^^  回退到上上次提交  
 git reset --hard f25a5f  回退到某个指定的版本（commit_id开头数字即可） 
 
 > 撤销修改 工作区回到最近一次add或commit状态（工作区修改的内容不想要了）  
@@ -64,6 +64,56 @@ git clone https://xxx.git
 
 > 提交本地仓库内容至远程库  
 git push origin master
+
+### 分支
+> 创建本地dev分支，并切换到本地dev分支   
+git checkout -b dev   
+
+> 相当于下面两个命令
+> 创建分支   
+git branch dev   
+
+> 切换到dev分支     
+git checkout dev
+
+> 查看所有本地分支  
+git branch
+
+> 查看所有分支  
+git branch -a
+
+> 合并dev分支到master分支（快进模式）    
+git merge dev
+
+> 删除分支   
+git branch -d dev
+
+> 强制删除分支   
+git branch -D dev  
+
+> 查看分支合并图   
+git log --graph --pretty=oneline --abbrev-commit
+
+> 合并dev分支到master分支（禁用快进模式）, 保留dev分支commit历史
+git merge --no-ff dev
+
+
+> 合并dev分支到master分支（压缩模式）, 保留dev分支commit历史，并将多次commit压缩成一次  
+git merge --squash dev
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
