@@ -1,65 +1,16 @@
-### 基本操作
-> 初始化仓库  
+# 基本操作
+> 创建SSH Key（/Users/fulibo/.ssh/id_rsa.pub）   
+ssh-keygen -t rsa -C "fulibowork@163.com"
+
+> 配置全局用户和邮箱   
+git config --global user.name "fulibo"   
+git config --global user.email "fulibowork@163.com"
+
+> 初始化
 git init  
 
-> 工作区的内容 -> 本地仓库的“暂存区”  
-> 可添加多次，然后一起提交  
-git add readme.md  
-
-> 本地仓库“暂存区”的内容 -> 本地仓库的“本地分支”   
-git commit -m "wrote a readme.md file"
-
-### 比较
-> 比较工作区与本地仓库的“暂存区”  
-git diff readme.md
-
-> 比较工作区与本地仓库的”本地分支“   
-git diff HEAD -- readme.md
-
-> 比较本地仓库的”暂存区“与本地仓库的”本地分支“  
-git diff --cached readme.md
-
-### 查看
-> 查看本地仓库的当前状态  
-git status
-
-> 查看commit记录  
-git log
-
-> 查看commit记录（简化版）  
-git log --pretty=oneline  
-
-> 查看操作记录  
-git reflog  
-    f25a5f2              HEAD@{2}: reset: moving to f25a5f   
-当前所在commit_id         执行了reset操作，移动到f25a5f
-
-> 查看远程分支的信息（地址等）    
-git remote -v
-
-### 回退与撤销(恢复)
-> 版本回退  
-git reset --hard HEAD^   回退到上次提交 
-git reset --hard HEAD^^  回退到上上次提交  
-git reset --hard f25a5f  回退到某个指定的版本（commit_id开头数字即可） 
-
-> 撤销修改 工作区回到最近一次add或commit状态（工作区修改的内容不想要了）  
-git checkout -- readme.md 
-
-> 撤销修改 撤销”暂存区“内容，重新放回到工作区（想撤回add操作）  
-git reset HEAD readme.md
-
-### 删除
-> 移除操作系统中文件  
-rm readme.md     
-
-> 移除本地库中文件   
-git rm readme.md   
-git commit -m "remove readme.md"
-
-### 远程库
-> 创建SSH Key（id_rsa.pub）   
-ssh-keygen -t rsa -C "youremail@example.com"
+> 提交本地仓库内容至远程库  
+git push origin master
 
 > 推送本地仓库至远程库（方式一）  
 git remote add origin https://xxx.git   
@@ -68,43 +19,90 @@ git push -u origin master
 > 克隆远程库（方式二）   
 git clone https://xxx.git
 
-> 提交本地仓库内容至远程库  
-git push origin master
+> 关联本地分支与远程分支  
+git branch --set-upstream-to=origin/dev dev
 
-### 分支
+# 增加
+> 工作区 -> 本地仓库的"暂存区"  
+git add readme.md  
+
+> 本地仓库的"暂存区" -> 本地仓库的"本地分支"   
+git commit -m "init commit"
+
 > 创建本地dev分支，并切换到本地dev分支   
-git checkout -b dev   
-
-> 相当于下面两个命令
-> 创建分支   
+git checkout -b dev    
+>
+> 相当于下面两个命令  
+> 1. 创建分支   
 git branch dev   
-
-> 切换到dev分支     
+> 2. 切换到dev分支     
 git checkout dev
 
 > 切换到dev分支，并与远程dev分支关联  
 git checkout -b dev origin/dev
 
-> 拉取远程分支更新内容
-git pull
 
-> 关联本地分支与远程分支  
-git branch --set-upstream-to=origin/dev dev
 
-> 查看所有本地分支  
-git branch
+# 删除
+### 删除
+> 移除操作系统中文件  
+rm readme.md     
 
-> 查看所有分支  
-git branch -a
+> 移除本地库中文件   
+git rm readme.md   
+git commit -m "remove readme.md"
+
+> 删除远程文件   
+git rm file   
+git commit -m "remove remote file"
 
 > 删除分支   
 git branch -d dev
 
 > 强制删除分支   
-git branch -D dev  
+git branch -D dev 
 
-> 查看分支合并图   
-git log --graph --pretty=oneline --abbrev-commit
+> 删除远程分支   
+git branch -r -d dev   
+git push origin :dev
+
+# 修改
+> 拉取远程分支更新内容  
+git pull
+
+> 储存当前工作区（准备去别的分支上修复Bug等）   
+git stash
+
+> 回到最近的一次存储点，并删除记录  
+git stash pop
+
+> 回到某个存储点，并删除记录   
+git stash pop stash@{1}
+
+> 回到某个存储点   
+git apply stash@{1}
+
+> 删除某个储存点记录   
+git drop stash@{1}
+
+> 回退到上次提交   
+git reset --hard HEAD^   
+
+> 回退到上上次提交   
+git reset --hard HEAD^^ 
+
+> 回退到某个指定的版本（commit_id开头数字即可）    
+git reset --hard f25a5f 
+
+> 撤销修改 工作区回到最近一次add或commit状态（工作区修改的内容不想要了）  
+git checkout -- readme.md 
+
+> 撤销修改 撤销"暂存区"内容，重新放回到工作区（撤回add操作）  
+git reset HEAD readme.md
+
+> 修改远程文件名   
+git mv old_file new_file  
+git commit -m "modify remote file name"
 
 > 合并dev分支到master分支（快进模式）    
 git merge dev  
@@ -134,18 +132,56 @@ git commit -m "finish function"
 * e98ef9d commit readme.md 
 ```
 
-### 储存工作区
-> 储存工作区（准备去别的分支上修复Bug等）   
-git stash
+# 查看
+> 查看本地仓库的当前状态  
+git status
+
+> 查看commit记录  
+git log
+
+> 查看commit记录（简化版）  
+git log --pretty=oneline   
+或 git log --oneline 
+
+> 查看操作记录  
+git reflog
+```
+    f25a5f2              HEAD@{2}: reset: moving to f25a5f   
+当前所在commit_id         执行了reset操作，移动到f25a5f
+```
+
+> 查看远程分支的信息（地址等）    
+git remote -v
+
+> 比较工作区与本地仓库的"暂存区"  
+git diff readme.md
+
+> 比较工作区与本地仓库的"本地分支"   
+git diff HEAD -- readme.md
+
+> 比较本地仓库的"暂存区"与本地仓库的"本地分支"  
+git diff --cached readme.md
+
+> 对比两次提交差异   
+git diff commit_id...commit_id_other
+
+> 查看某次提交更新的内容   
+git show commit_id
+
+> 查看所有本地分支  
+git branch
+
+> 查看所有分支  
+git branch -a
+
+> 查看分支合并图   
+git log --graph --pretty=oneline --abbrev-commit
 
 > 查看储存列表   
 git stash list
 
-> 回到最近的一次存储点   
-git stash pop
-
-### Rebase
-> 单分支上多人协作，冲突解决  
+# Rebase
+### 单分支上多人协作，冲突解决  
 > 方式一，使用git pull    
 git push origin master 提交失败，因为有冲突 
 git pull    
@@ -184,11 +220,31 @@ git push origin master
 git rebase --skip  忽略冲突的commit, 保留别人的commit
 
 
-##### Rebase合并多次提交记录  
-git rebase -i HEAD~3 合并前三次提交
+### Rebase合并多次提交记录  
+> 合并最近三次提交    
+git rebase -i HEAD~3 
 
-> git rebase -i (start end] 指定合并范围   
-git rebase -i da123n 1n2n121
+> 合并局部提交
+> 如果想合并1-2 3-4
+```
+* 61f54b5 4 by me
+* 011f680 3 by me
+* b8c56d8 modify by other
+* 022f680 2 by me
+* 83fd038 1 by me
+* 45fd038 init commit
+```
+> git rebase -i 45fd038   
+> 修改如下
+```
+pick 83fd038   1 by me
+s    022f680   2 by me
+pick b8c56d8   modify by other
+pick 011f680   3 by me
+s    61f54b5   4 by me
+```
+> 保存退出, 添加/修改合并日志信息
+
 
 ```
 pick:   保留该commit（缩写:p）
@@ -204,7 +260,7 @@ drop:   我要丢弃该commit（缩写:d）
 git rebase --edit-todo    
 git rebase --continue
 
-##### Rebase合并分支
+### Rebase合并分支
 > dev内容合并到master   
 git rebase dev   
 解决commit_1冲突   
@@ -216,7 +272,7 @@ git rebase --continue
 git push origin master
 
 
-### 标签
+# 标签
 > 打标签   
 git tag v1.0   
 git tag -a v1.0 -m "1.0标签"
@@ -243,14 +299,3 @@ git push origin --tags
 > 删除远程标签  
 git tag -d v0.9   
 git push origin :refs/tags/v0.9
-
-
-
-
-
-
-
-
-
-
-
