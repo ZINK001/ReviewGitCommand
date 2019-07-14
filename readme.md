@@ -44,7 +44,6 @@ git checkout -b dev origin/dev
 
 
 # 删除
-### 删除
 > 移除操作系统中文件  
 rm readme.md     
 
