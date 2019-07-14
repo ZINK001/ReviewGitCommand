@@ -89,7 +89,7 @@ git checkout -b dev origin/dev
 git pull
 
 > 关联本地分支与远程分支  
-git branch --up-stream-to dev origin/dev
+git branch --set-upstream-to=origin/dev dev
 
 > 查看所有本地分支  
 git branch
